@@ -1,20 +1,27 @@
 package com.ifma.locaimovel.entiteis;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
 @Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_nome;
 	private String nome;
 	private String cpf;
 	private String data_nascimento;
+	
+    @OneToMany(mappedBy = "cliente")
+	private List<Locacao> locaçao = new ArrayList<>();
 
 	public Cliente() {
 
@@ -58,6 +65,10 @@ public class Cliente implements Serializable {
 
 	public void setData_nascimento(String data_nascimento) {
 		this.data_nascimento = data_nascimento;
+	}
+
+	public List<Locacao> getLocaçao() {
+		return locaçao;
 	}
 
 	@Override
