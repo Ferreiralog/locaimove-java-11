@@ -4,27 +4,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
+@Table(name ="tb_cliente")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_nome;
+
 	private String nome;
+	@Column(unique = true)
 	private String cpf;
 	private String data_nascimento;
-	
+
 	@JsonIgnore
-    @OneToMany(mappedBy = "cliente")
-	private List<Locacao> locaçao = new ArrayList<>();
+	@OneToMany(mappedBy = "cliente")
+	private List<Locacao> locacao = new ArrayList<>();
 
 	public Cliente() {
 
@@ -71,7 +77,7 @@ public class Cliente implements Serializable {
 	}
 
 	public List<Locacao> getLocaçao() {
-		return locaçao;
+		return locacao;
 	}
 
 	@Override

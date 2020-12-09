@@ -21,9 +21,9 @@ public class LocacaoService {
 		return repository.findAll();
 
 	}
-	
+
 	public Locacao findById(Integer id_nome) {
-		
+
 		Optional<Locacao> obj = repository.findById(id_nome);
 		return obj.get();
 	}

@@ -21,9 +21,9 @@ public class ClienteService {
 		return repository.findAll();
 
 	}
-	
+
 	public Cliente findById(Integer id_nome) {
-		
+
 		Optional<Cliente> obj = repository.findById(id_nome);
 		return obj.get();
 	}
