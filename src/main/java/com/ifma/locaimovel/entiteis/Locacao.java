@@ -2,6 +2,8 @@ package com.ifma.locaimovel.entiteis;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +14,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ifma.locaimovel.entiteis.enums.StatusLocacao;
 
 @Entity
@@ -40,6 +44,10 @@ public class Locacao implements Serializable {
 
 	@Column(columnDefinition = "text")
 	private String observacoes;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "locacao")
+	private Set<Imoveis> imoveis = new HashSet<>();
 
 	public Locacao() {
 
@@ -55,6 +63,8 @@ public class Locacao implements Serializable {
 		this.observacoes = observacoes;
 	}
 
+	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -103,6 +113,11 @@ public class Locacao implements Serializable {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
+	
+	public Set<Imoveis> getImoveis() {
+		return imoveis;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -129,4 +144,5 @@ public class Locacao implements Serializable {
 		return true;
 	}
 
+	
 }

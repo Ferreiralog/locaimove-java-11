@@ -31,6 +31,10 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Locacao> locacao = new ArrayList<>();
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "cliente")
+	private List<Locacao> contato = new ArrayList<>();
 
 	public Cliente() {
 
