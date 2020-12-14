@@ -23,7 +23,7 @@ public class Contato implements Serializable {
 	private String email;
 
 	@ManyToOne
-	@JoinColumn(name = "cliente")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	public Contato() {

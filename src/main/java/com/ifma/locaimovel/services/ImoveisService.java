@@ -22,9 +22,9 @@ public class ImoveisService {
 
 	}
 
-	public Imoveis findById(Integer id_nome) {
+	public Imoveis findById(Integer id_imovel) {
 
-		Optional<Imoveis> obj = repository.findById(id_nome);
+		Optional<Imoveis> obj = repository.findById(id_imovel);
 		return obj.get();
 	}
 }

@@ -22,9 +22,9 @@ public class ContatoService {
 
 	}
 
-	public Contato findById(Integer id_nome) {
+	public Contato findById(Integer id_contato) {
 
-		Optional<Contato> obj = repository.findById(id_nome);
+		Optional<Contato> obj = repository.findById(id_contato);
 		return obj.get();
 	}
 }

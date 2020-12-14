@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -25,35 +27,36 @@ import com.ifma.locaimovel.entiteis.enums.StatusLocacao;
 @Table(name = "tb_locacao")
 public class Locacao implements Serializable {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant data_inicio;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd 'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant data_fim;
-	
 	@Enumerated(EnumType.STRING)
 	private StatusLocacao status;
-
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "cliente")
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	@Column(columnDefinition = "text")
 	private String observacoes;
-	
-	@JsonIgnore
+
 	@OneToMany(mappedBy = "locacao")
 	private Set<Imoveis> imoveis = new HashSet<>();
+
+	@OneToOne(mappedBy = "locacao", cascade = CascadeType.ALL)
+	private Aluguel aluguel;
 
 	public Locacao() {
 
 	}
 
-	public Locacao(Integer id, Instant data_inicio, Instant data_fim, StatusLocacao status, Cliente cliente, String observacoes) {
+	public Locacao(Integer id, Instant data_inicio, Instant data_fim, StatusLocacao status, Cliente cliente,
+			String observacoes) {
 		super();
 		this.id = id;
 		this.data_inicio = data_inicio;
@@ -63,8 +66,6 @@ public class Locacao implements Serializable {
 		this.observacoes = observacoes;
 	}
 
-	
-	
 	public Integer getId() {
 		return id;
 	}
@@ -106,6 +107,14 @@ public class Locacao implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public Aluguel getAluguel() {
+		return aluguel;
+	}
+
+	public void setAluguel(Aluguel aluguel) {
+		this.aluguel = aluguel;
+	}
+
 	public String getObservacoes() {
 		return observacoes;
 	}
@@ -113,11 +122,10 @@ public class Locacao implements Serializable {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
-	
+
 	public Set<Imoveis> getImoveis() {
 		return imoveis;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -144,5 +152,4 @@ public class Locacao implements Serializable {
 		return true;
 	}
 
-	
 }

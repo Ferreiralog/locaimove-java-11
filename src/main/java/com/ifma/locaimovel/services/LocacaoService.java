@@ -22,9 +22,9 @@ public class LocacaoService {
 
 	}
 
-	public Locacao findById(Integer id_nome) {
+	public Locacao findById(Integer id) {
 
-		Optional<Locacao> obj = repository.findById(id_nome);
+		Optional<Locacao> obj = repository.findById(id);
 		return obj.get();
 	}
 }

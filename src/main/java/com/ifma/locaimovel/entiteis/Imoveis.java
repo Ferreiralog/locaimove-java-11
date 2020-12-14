@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ifma.locaimovel.entiteis.enums.ImovelTipo;
 
 @Entity
@@ -29,17 +30,16 @@ public class Imoveis implements Serializable {
 	private Integer banheiro;
 	private Integer vag_garagem;
 	private double valor_sugerido;
-
 	@Enumerated(EnumType.STRING)
 	private ImovelTipo tipoImovel;
 
-	@ManyToOne
-	@JoinColumn(name = "locacao")
-	private Locacao locacao;
-	
-	
-	@OneToOne(mappedBy = "imovel", cascade = CascadeType.ALL )
+	@OneToOne(mappedBy = "imovel", cascade = CascadeType.ALL)
 	private Endereco endereco;
+
+	@JsonIgnore
+	@ManyToOne
+	@JoinColumn(name = "locacao_id")
+	private Locacao locacao;
 
 	public Imoveis() {
 
@@ -105,8 +105,6 @@ public class Imoveis implements Serializable {
 	public void setValor_sugerido(double valor_sugerido) {
 		this.valor_sugerido = valor_sugerido;
 	}
-	
-	
 
 	public ImovelTipo getTipoImovel() {
 		return tipoImovel;

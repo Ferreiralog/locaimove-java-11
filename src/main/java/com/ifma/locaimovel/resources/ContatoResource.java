@@ -26,9 +26,9 @@ public class ContatoResource {
 
 	}
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Contato> findById(@PathVariable Integer id) {
-		Contato obj = service.findById(id);
+	@GetMapping(value = "/{id_contato}")
+	public ResponseEntity<Contato> findById(@PathVariable Integer id_contato) {
+		Contato obj = service.findById(id_contato);
 		return ResponseEntity.ok().body(obj);
 
 	}

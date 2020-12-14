@@ -26,9 +26,9 @@ public class ImoveisResource {
 
 	}
 
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<Imoveis> findById(@PathVariable Integer id) {
-		Imoveis obj = service.findById(id);
+	@GetMapping(value = "/{id_imovel}")
+	public ResponseEntity<Imoveis> findById(@PathVariable Integer id_imovel) {
+		Imoveis obj = service.findById(id_imovel);
 		return ResponseEntity.ok().body(obj);
 
 	}

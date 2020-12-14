@@ -15,23 +15,20 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name ="tb_cliente")
+@Table(name = "tb_cliente")
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id_nome;
-
 	private String nome;
 	@Column(unique = true)
 	private String cpf;
 	private String data_nascimento;
 
-	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Locacao> locacao = new ArrayList<>();
-	
 	@JsonIgnore
 	@OneToMany(mappedBy = "cliente")
 	private List<Locacao> contato = new ArrayList<>();

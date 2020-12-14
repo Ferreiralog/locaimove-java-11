@@ -10,6 +10,8 @@ import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_endereco")
 public class Endereco implements Serializable {
@@ -23,7 +25,8 @@ public class Endereco implements Serializable {
 	private String cep;
 	private String cidade;
 	private String estado;
-	
+
+	@JsonIgnore
 	@OneToOne
 	@MapsId
 	private Imoveis imovel;
@@ -32,7 +35,8 @@ public class Endereco implements Serializable {
 
 	}
 
-	public Endereco(Integer id, String logradouro, String numero, String bairro, String cep, String cidade,	String estado,Imoveis imovel) {
+	public Endereco(Integer id, String logradouro, String numero, String bairro, String cep, String cidade,
+			String estado, Imoveis imovel) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
@@ -99,7 +103,7 @@ public class Endereco implements Serializable {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
+
 	public Imoveis getImovel() {
 		return imovel;
 	}
@@ -108,17 +112,14 @@ public class Endereco implements Serializable {
 		this.imovel = imovel;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
-	}	
-	
+	}
 
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
